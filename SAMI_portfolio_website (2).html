@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sami Abdullah - Portfolio</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#f97316',
+                            purple: '#a855f7',
+                            sky: '#38bdf8',
+                            emerald: '#34d399'
+                        }
+                    },
+                    fontSize: {
+                        '2xs': '0.6875rem',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-mono {
+            font-family: 'Fira Code', monospace;
+        }
+        
+        @keyframes spin-border {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .animated-outer-frame {
+            position: relative;
+            border-radius: 1.5rem;
+            padding: 3px;
+            overflow: hidden;
+            background: #000000;
+        }
+
+        .animated-outer-frame::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, #f97316, #a855f7, #38bdf8, #10b981, #f97316);
+            animation: spin-border 3.5s linear infinite;
+            z-index: 0;
+        }
+
+        .animated-inner-content {
+            position: relative;
+            z-index: 10;
+            background-color: #000000;
+            border-radius: 1.4rem;
+        }
+
+        .modal-animate {
+            animation: modalFadeIn 0.25s ease-out forwards;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f97316;
+        }
+
+        /* Smooth floating animation */
+        @keyframes floatGentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .animate-float-slow {
+            display: inline-block;
+            animation: floatGentle 2.5s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-black text-slate-100 min-h-screen p-3 sm:p-6 md:p-8 flex items-center justify-center selection:bg-orange-500 selection:text-white">
+
+    <!-- OUTER ANIMATED GRADIENT FRAME CONTAINER -->
+    <div class="animated-outer-frame w-full max-w-6xl shadow-2xl shadow-orange-500/10">
+        <div class="animated-inner-content p-5 sm:p-8 md:p-10 min-h-[88vh] flex flex-col justify-between">
+            
+            <!-- TOP NAVIGATION HEADER -->
+            <header class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-900">
+                <!-- Branding / Logo -->
+                <div class="flex flex-col text-center sm:text-left">
+                    <span class="text-base sm:text-xl font-mono font-bold tracking-widest text-orange-400 uppercase">PORTFOLIO</span>
+                </div>
+
+                <!-- Navigation Actions -->
+                <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
+                    <button onclick="openModal('cv')" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-orange-500/50 text-slate-200 text-xs font-mono transition-all flex items-center gap-1.5 shadow">
+                        <i class="fa-solid fa-file-arrow-down text-orange-400"></i>
+                        <span>Download CV</span>
+                    </button>
+
+                    <button onclick="openModal('hire')" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-orange-500/50 text-slate-200 text-xs font-mono transition-all flex items-center gap-1.5 shadow">
+                        <i class="fa-solid fa-briefcase text-orange-400"></i>
+                        <span>Hire Me</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- HERO MAIN SECTION -->
+            <main class="my-8 md:my-12 flex flex-col md:flex-row items-center justify-between gap-10 md:gap-12">
+                <!-- Left Intro Column -->
+                <div class="w-full md:w-1/2 space-y-6 text-center md:text-left">
+                    <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                        Hi !<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-purple-400">I'm </span><span class="inline-block animate-float-slow text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-sky-400">Sami</span><span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-400">&nbsp;Abdullah</span>
+                        <i class="fa-solid fa-circle-check text-sky-400 text-3xl sm:text-4xl md:text-5xl inline-block align-middle ml-1" title="Verified Profile"></i>
+                    </h1>
+
+                    <p class="text-slate-400 text-sm sm:text-base max-w-xl font-light leading-relaxed">
+                        Passionate about Machine Learning, Artificial Intelligence, and software engineering, I strive to build innovative solutions that solve real-world challenges. Welcome to my portfolio, where I showcase my journey.
+                    </p>
+
+                    <!-- Hero Call to Action Buttons -->
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-2">
+                        <!-- Learn More Button -->
+                        <button onclick="openModal('hub')" class="px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-mono text-sm font-semibold transition-all shadow-lg shadow-orange-500/25 flex items-center gap-2 transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-compass"></i>
+                            <span>Learn More</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Prominent Circular Sami's AI Widget -->
+                <div class="flex items-center justify-center w-full md:w-1/2">
+                    <div onclick="openModal('ai')" class="relative group cursor-pointer flex items-center justify-center">
+                        
+                        <!-- Outer Glow Ring Animation -->
+                        <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-600 via-sky-500 to-orange-500 opacity-70 blur-lg group-hover:opacity-100 transition duration-500 animate-pulse"></div>
+
+                        <!-- Main Circular AI Card / Button -->
+                        <div class="relative w-48 h-48 sm:w-60 sm:h-60 rounded-full bg-slate-950 border-2 border-purple-500/50 hover:border-purple-400 p-4 flex flex-col items-center justify-center text-center shadow-2xl transition-all duration-300 transform group-hover:scale-105">
+                            
+                            <!-- Status Indicator Badge -->
+                            <div class="absolute top-4 flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-950/80 border border-purple-500/30 text-2xs font-mono text-purple-300">
+                                <span class="relative flex h-2 w-2">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+                                </span>
+                                <span>Online AI</span>
+                            </div>
+
+                            <!-- Robot AI Icon -->
+                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-sky-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 group-hover:text-purple-300 text-2xl sm:text-3xl mb-2 transition-colors">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+
+                            <!-- AI Label -->
+                            <h3 class="text-base sm:text-lg font-mono font-bold text-white group-hover:text-purple-300 transition-colors">
+                                Sami's AI
+                            </h3>
+                            <p class="text-2xs font-mono text-slate-400 mt-0.5">Click to Chat</p>
+
+                            <!-- Interactive Click Hint -->
+                            <div class="mt-2 text-orange-400 text-xs font-mono flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                <span>Ask Anything</span>
+                                <i class="fa-solid fa-arrow-right text-2xs"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+
+            <!-- FOOTER -->
+            <footer class="pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+                <p>&copy; 2026 Sami Abdullah. All rights reserved.</p>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- ==================== MODALS SECTION ==================== -->
+
+    <!-- LEARN MORE HUB MODAL (Tabs: About, Education, Skills, Projects, Experience) -->
+    <div id="modal-hub" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="modal-animate bg-slate-950 border border-slate-800 w-full max-w-3xl rounded-2xl p-5 sm:p-7 shadow-2xl max-h-[88vh] flex flex-col justify-between">
+            
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between pb-4 border-b border-slate-900">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 text-sm">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-mono font-bold text-white">Sami's Portfolio Hub</h3>
+                        <p class="text-2xs text-slate-400 font-mono">Explore background, skills & experience</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('hub')" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Tab Navigation Buttons -->
+            <div class="flex items-center gap-1.5 sm:gap-2 my-4 overflow-x-auto pb-2 border-b border-slate-900 text-xs font-mono">
+                <button onclick="switchTab('about')" id="tab-btn-about" class="px-3.5 py-2 rounded-lg bg-orange-500 text-white font-medium transition-all whitespace-nowrap">
+                    1. About Me
+                </button>
+                <button onclick="switchTab('education')" id="tab-btn-education" class="px-3.5 py-2 rounded-lg bg-slate-900 text-slate-400 hover:text-white transition-all whitespace-nowrap">
+                    2. Education
+                </button>
+                <button onclick="switchTab('skills')" id="tab-btn-skills" class="px-3.5 py-2 rounded-lg bg-slate-900 text-slate-400 hover:text-white transition-all whitespace-nowrap">
+                    3. Skills
+                </button>
+                <button onclick="switchTab('projects')" id="tab-btn-projects" class="px-3.5 py-2 rounded-lg bg-slate-900 text-slate-400 hover:text-white transition-all whitespace-nowrap">
+                    4. Projects
+                </button>
+                <button onclick="switchTab('experience')" id="tab-btn-experience" class="px-3.5 py-2 rounded-lg bg-slate-900 text-slate-400 hover:text-white transition-all whitespace-nowrap">
+                    5. Experience
+                </button>
+            </div>
+
+            <!-- Tab Content Container -->
+            <div class="overflow-y-auto pr-1 my-2 flex-1 text-slate-300 text-sm leading-relaxed space-y-4 font-sans">
+                
+                <!-- TAB 1: ABOUT -->
+                <div id="tab-content-about" class="space-y-3">
+                    <h4 class="text-orange-400 font-mono font-semibold text-base flex items-center gap-2">
+                        <i class="fa-solid fa-user text-xs"></i> About Me
+                    </h4>
+                    <p>
+                        Hello! I'm <strong>Sami Abdullah</strong>, a Software Engineer with a strong interest in Machine Learning, Artificial Intelligence, and Software Development. I enjoy building software that is simple, useful, and designed to solve real-world problems.
+                    </p>
+                    <p>
+                        I believe that learning never stops. That's why I always try to improve my knowledge, explore new technologies, and challenge myself with different projects. Every project I work on helps me become a better developer and strengthens my problem-solving skills.
+                    </p>
+                    <p>
+                        My main focus is Machine Learning and Artificial Intelligence. I am interested in developing intelligent systems that can learn from data, automate tasks, and provide smart solutions for real-world challenges.
+                    </p>
+                </div>
+
+                <!-- TAB 2: EDUCATION -->
+                <div id="tab-content-education" class="hidden space-y-3">
+                    <h4 class="text-orange-400 font-mono font-semibold text-base flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap text-xs"></i> Education
+                    </h4>
+                    <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                            <h5 class="text-white font-mono font-bold text-base">Bachelor of Science (B.Sc.) in Software Engineering</h5>
+                            <span class="px-2.5 py-0.5 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-mono w-fit">2025 – Present</span>
+                        </div>
+                        <p class="text-xs text-slate-400 font-mono flex items-center gap-1">
+                            <i class="fa-solid fa-university text-orange-400"></i> Daffodil International University (DIU)
+                        </p>
+                        <p class="pt-2 text-xs text-slate-300">
+                            My academic journey at Daffodil International University is centered on building a strong foundation in software engineering while exploring Artificial Intelligence and Machine Learning.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- TAB 3: SKILLS -->
+                <div id="tab-content-skills" class="hidden space-y-4">
+                    <h4 class="text-orange-400 font-mono font-semibold text-base flex items-center gap-2">
+                        <i class="fa-solid fa-code text-xs"></i> Skills & Technical Proficiency
+                    </h4>
+
+                    <!-- Programming Languages -->
+                    <div class="space-y-2">
+                        <h5 class="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider">Programming Languages</h5>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-orange-400 flex items-center gap-1.5">
+                                <i class="fa-brands fa-python"></i> Python
+                            </span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-sky-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-code"></i> C
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Tools & Platforms -->
+                    <div class="space-y-2">
+                        <h5 class="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider">Tools & Platforms</h5>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-slate-200">Git</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-slate-200">GitHub</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-slate-200">VS Code</span>
+                        </div>
+                    </div>
+
+                    <!-- Currently Learning -->
+                    <div class="space-y-2">
+                        <h5 class="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider">Currently Learning</h5>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-lg bg-purple-950/40 border border-purple-800/40 text-xs font-mono text-purple-300">C++</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-purple-950/40 border border-purple-800/40 text-xs font-mono text-purple-300">Data Structures & Algorithms</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-purple-950/40 border border-purple-800/40 text-xs font-mono text-purple-300">OOP</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-purple-950/40 border border-purple-800/40 text-xs font-mono text-purple-300">SQL</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-purple-950/40 border border-purple-800/40 text-xs font-mono text-purple-300">Machine Learning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: PROJECTS -->
+                <div id="tab-content-projects" class="hidden space-y-3">
+                    <h4 class="text-orange-400 font-mono font-semibold text-base flex items-center gap-2">
+                        <i class="fa-solid fa-diagram-project text-xs"></i> Projects
+                    </h4>
+                    <div class="p-4 rounded-xl bg-slate-900 border border-dashed border-slate-800 text-center space-y-2 my-3">
+                        <i class="fa-solid fa-rocket text-2xl text-orange-400 animate-bounce"></i>
+                        <h5 class="font-mono font-bold text-white text-sm">Projects Coming Soon...</h5>
+                        <p class="text-xs text-slate-400">Exciting ML/AI and Software projects are currently under development.</p>
+                    </div>
+                </div>
+
+                <!-- TAB 5: EXPERIENCE -->
+                <div id="tab-content-experience" class="hidden space-y-3">
+                    <h4 class="text-orange-400 font-mono font-semibold text-base flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase text-xs"></i> Experience
+                    </h4>
+                    <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h5 class="text-white font-mono font-bold text-sm">Hands-On Software Development</h5>
+                            <span class="px-2 py-0.5 rounded bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-mono">6+ Months</span>
+                        </div>
+                        <p class="text-xs text-slate-300">
+                            I have 6+ months of hands-on experience in software development through personal and academic projects.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="pt-3 border-t border-slate-900 flex justify-end">
+                <button onclick="closeModal('hub')" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs font-mono text-slate-300 transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- SAMI'S AI MODAL -->
+    <div id="modal-ai" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="modal-animate bg-slate-950 border border-purple-500/30 w-full max-w-lg rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
+            
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between pb-3 border-b border-slate-900">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 text-sm">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-mono font-bold text-white">Sami's AI</h3>
+                        <p class="text-2xs text-purple-300 font-mono">Interactive AI Assistant for Sami Abdullah</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('ai')" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Chat Output Box -->
+            <div id="ai-chat-output" class="h-64 overflow-y-auto bg-black/60 border border-slate-900 rounded-xl p-3.5 space-y-3 font-mono text-xs">
+                <div class="bg-purple-950/40 border border-purple-800/40 p-3 rounded-lg text-purple-200">
+                    Hello! I'm <strong>Sami's AI</strong>. Ask me anything about Sami Abdullah — his education at DIU, family, skills, projects, experience, or background!
+                </div>
+            </div>
+
+            <!-- Search Input Box -->
+            <form onsubmit="handleAiQuery(event)" class="space-y-2">
+                <div class="relative flex items-center">
+                    <input type="text" id="ai-input" placeholder="Ask me anything about Sami Abdullah..." class="w-full pl-3.5 pr-10 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors">
+                    <button type="submit" class="absolute right-2 text-purple-400 hover:text-purple-300 p-1.5 transition-colors">
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Modal Footer -->
+            <div class="pt-2 border-t border-slate-900 flex justify-end">
+                <button onclick="closeModal('ai')" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs font-mono text-slate-300 transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CV MODAL -->
+    <div id="modal-cv" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="modal-animate bg-slate-950 border border-slate-800 w-full max-w-md rounded-2xl p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-900">
+                <h3 class="text-base font-mono font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-file-arrow-down text-orange-400"></i> Curriculum Vitae
+                </h3>
+                <button onclick="closeModal('cv')" class="text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+                Sami is currently updating his CV, so it is in a pending state and will be uploaded here soon.
+            </p>
+            
+            <div id="cv-status-msg" class="hidden p-3 rounded-xl bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-mono flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>Sami is currently updating his CV.</span>
+            </div>
+
+            <div class="pt-2 flex justify-end gap-2.5">
+                <button onclick="closeModal('cv')" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300 hover:bg-slate-800 transition-colors">
+                    Close
+                </button>
+                <button onclick="triggerCvDownload()" class="px-4 py-2 rounded-xl bg-orange-500 text-white font-mono text-xs font-semibold hover:bg-orange-600 transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Download</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- HIRE ME MODAL -->
+    <div id="modal-hire" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="modal-animate bg-slate-950 border border-slate-800 w-full max-w-md rounded-2xl p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-900">
+                <h3 class="text-base font-mono font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-briefcase text-orange-400"></i> Work With Sami
+                </h3>
+                <button onclick="closeModal('hire')" class="text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <p class="text-xs text-slate-300">
+                Interested in collaborating or hiring Sami Abdullah? Reach out via email directly:
+            </p>
+            
+            <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2 overflow-hidden">
+                    <i class="fa-solid fa-envelope text-orange-400 text-sm"></i>
+                    <span id="sami-email-text" class="text-xs font-mono text-white truncate">sami.abdullah@gmail.com</span>
+                </div>
+                <button onclick="copyEmailToClipboard()" class="px-3 py-1.5 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 text-orange-400 text-2xs font-mono transition-colors flex items-center gap-1 shrink-0">
+                    <i class="fa-regular fa-copy"></i>
+                    <span id="copy-btn-label">Copy</span>
+                </button>
+            </div>
+
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-end gap-2">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sami.abdullah@gmail.com" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-gradient-to-r from-rose-500 to-red-600 hover:from-rose-600 hover:to-red-700 text-white font-mono text-xs font-semibold transition-all flex items-center justify-center gap-2 shadow">
+                    <i class="fa-brands fa-google"></i>
+                    <span>Open in Gmail</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-2xs"></i>
+                </a>
+                <button onclick="closeModal('hire')" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300 hover:bg-slate-800 transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Modal Handlers
+        function openModal(modalId) {
+            const modal = document.getElementById('modal-' + modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById('modal-' + modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                ['hub', 'ai', 'cv', 'hire'].forEach(m => closeModal(m));
+            }
+        });
+
+        // Tab Switching for Portfolio Hub
+        function switchTab(tabName) {
+            const tabs = ['about', 'education', 'skills', 'projects', 'experience'];
+            tabs.forEach(t => {
+                const btn = document.getElementById('tab-btn-' + t);
+                const content = document.getElementById('tab-content-' + t);
+                
+                if (t === tabName) {
+                    btn.className = 'px-3.5 py-2 rounded-lg bg-orange-500 text-white font-medium transition-all whitespace-nowrap';
+                    content.classList.remove('hidden');
+                } else {
+                    btn.className = 'px-3.5 py-2 rounded-lg bg-slate-900 text-slate-400 hover:text-white transition-all whitespace-nowrap';
+                    content.classList.add('hidden');
+                }
+            });
+        }
+
+        // Copy Email to Clipboard
+        function copyEmailToClipboard() {
+            const email = document.getElementById('sami-email-text').innerText;
+            const textarea = document.createElement('textarea');
+            textarea.value = email;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            const label = document.getElementById('copy-btn-label');
+            if (label) {
+                label.innerText = 'Copied!';
+                setTimeout(() => {
+                    label.innerText = 'Copy';
+                }, 2000);
+            }
+        }
+
+        // Download CV trigger
+        function triggerCvDownload() {
+            const statusMsg = document.getElementById('cv-status-msg');
+            if (statusMsg) {
+                statusMsg.classList.remove('hidden');
+            }
+
+            const cvText = "Sami is currently updating his CV.";
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(cvText));
+            element.setAttribute('download', 'Sami_Abdullah_CV.txt');
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        // Sami's AI Response Generator
+        function handleAiQuery(e) {
+            e.preventDefault();
+            const input = document.getElementById('ai-input');
+            const query = input.value.trim();
+            if (!query) return;
+
+            const chatOutput = document.getElementById('ai-chat-output');
+
+            // User message
+            const userBubble = document.createElement('div');
+            userBubble.className = 'bg-slate-900 border border-slate-800 p-2.5 rounded-lg text-slate-200 text-right';
+            userBubble.innerText = query;
+            chatOutput.appendChild(userBubble);
+
+            input.value = '';
+
+            // AI answer evaluation
+            setTimeout(() => {
+                const aiBubble = document.createElement('div');
+                aiBubble.className = 'bg-purple-950/40 border border-purple-800/40 p-3 rounded-lg text-purple-200';
+
+                const lower = query.toLowerCase();
+                const isBanglaScript = /[\u0980-\u09FF]/.test(query);
+                let reply = "";
+
+                if (isBanglaScript) {
+                    reply = "I can understand the Bangla language, but I cannot speak or reply in Bangla. I can only communicate in English! Please feel free to ask me anything about Sami Abdullah.";
+                } else if (lower.includes("father") || lower.includes("baba") || lower.includes("parent") || lower.includes("saju") || lower.includes("sazzad")) {
+                    reply = "Sami's father is Sazzad Ali Saju.";
+                } else if (lower.includes("mother") || lower.includes("ma") || lower.includes("tohura") || lower.includes("yesmin")) {
+                    reply = "Sami's mother is Tohura Yesmin.";
+                } else if (lower.includes("brother") || lower.includes("vai") || lower.includes("mahin") || lower.includes("saki")) {
+                    reply = "Sami has one brother named Saki Mohaimin Mahin. They are two brothers with no sisters.";
+                } else if (lower.includes("family") || lower.includes("member") || lower.includes("paribar")) {
+                    reply = "Sami's family consists of 4 members: his father Sazzad Ali Saju, mother Tohura Yesmin, brother Saki Mohaimin Mahin, and Sami himself.";
+                } else if (lower.includes("politic") || lower.includes("political") || lower.includes("rajniti") || lower.includes("generation")) {
+                    reply = "Sami comes from a prominent political background spanning 3 generations of politicians.";
+                } else if (lower.includes("single") || lower.includes("relationship") || lower.includes("marry") || lower.includes("girlfriend") || lower.includes("gf")) {
+                    reply = "Sami is currently single.";
+                } else if (lower.includes("who") || lower.includes("about") || lower.includes("identity") || lower.includes("sami")) {
+                    reply = "Sami Abdullah is a Software Engineer specializing in Machine Learning, Artificial Intelligence, and Software Development.";
+                } else if (lower.includes("home") || lower.includes("where") || lower.includes("address") || lower.includes("location") || lower.includes("dhaka") || lower.includes("live")) {
+                    reply = "Sami lives in Dhaka, Bangladesh.";
+                } else if (lower.includes("university") || lower.includes("versity") || lower.includes("education") || lower.includes("diu") || lower.includes("study")) {
+                    reply = "Sami is pursuing a Bachelor of Science (B.Sc.) in Software Engineering at Daffodil International University (DIU), session 2025 – Present.";
+                } else if (lower.includes("skill") || lower.includes("language") || lower.includes("python") || lower.includes("c")) {
+                    reply = "Sami is skilled in Python, C, Git, GitHub, and VS Code, while currently learning C++, Data Structures & Algorithms, OOP, SQL, and ML fundamentals.";
+                } else if (lower.includes("experience") || lower.includes("work")) {
+                    reply = "Sami has 6+ months of hands-on experience in software development through personal and academic projects.";
+                } else if (lower.includes("project")) {
+                    reply = "Sami is currently building ML and Software projects. Check out the 'Projects' tab in the Learn More hub!";
+                } else {
+                    reply = "Sami Abdullah is a Software Engineering student at Daffodil International University (DIU) focused on Machine Learning and AI. Feel free to ask about his background, family, or skills!";
+                }
+
+                aiBubble.innerHTML = "<strong>Sami's AI:</strong> " + reply;
+                chatOutput.appendChild(aiBubble);
+                chatOutput.scrollTop = chatOutput.scrollHeight;
+            }, 300);
+        }
+    </script>
+</body>
+</html>

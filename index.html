@@ -35,9 +35,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        body {
+        body, body * {
             font-family: 'Inter', sans-serif;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+            -webkit-touch-callout: none !important;
         }
+
+        /* Allow typing and selecting inside text inputs */
+        input, textarea {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
+        }
+
         .font-mono {
             font-family: 'Fira Code', monospace;
         }
@@ -395,7 +409,7 @@
             <!-- Chat Output Box -->
             <div id="ai-chat-output" class="h-64 overflow-y-auto bg-black/60 border border-slate-900 rounded-xl p-3.5 space-y-3 font-mono text-xs">
                 <div class="bg-purple-950/40 border border-purple-800/40 p-3 rounded-lg text-purple-200">
-                    Hello! I'm <strong>Sami's AI</strong>. Ask me anything about Sami Abdullah — his education at DIU, family, skills, projects, experience, or background!
+                    Hello! I'm <strong>Sami's AI</strong>. Ask me anything about Sami Abdullah! Please note that I can only answer questions specifically related to Sami Abdullah and this portfolio.
                 </div>
             </div>
 
@@ -470,7 +484,7 @@
             <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2 overflow-hidden">
                     <i class="fa-solid fa-envelope text-orange-400 text-sm"></i>
-                    <span id="sami-email-text" class="text-xs font-mono text-white truncate">sami.abdullah@gmail.com</span>
+                    <span id="sami-email-text" class="text-xs font-mono text-white truncate">samiabdullah4049@gmail.com</span>
                 </div>
                 <button onclick="copyEmailToClipboard()" class="px-3 py-1.5 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 text-orange-400 text-2xs font-mono transition-colors flex items-center gap-1 shrink-0">
                     <i class="fa-regular fa-copy"></i>
@@ -479,7 +493,7 @@
             </div>
 
             <div class="pt-2 flex flex-col sm:flex-row items-center justify-end gap-2">
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sami.abdullah@gmail.com" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-gradient-to-r from-rose-500 to-red-600 hover:from-rose-600 hover:to-red-700 text-white font-mono text-xs font-semibold transition-all flex items-center justify-center gap-2 shadow">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=samiabdullah4049@gmail.com" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-gradient-to-r from-rose-500 to-red-600 hover:from-rose-600 hover:to-red-700 text-white font-mono text-xs font-semibold transition-all flex items-center justify-center gap-2 shadow">
                     <i class="fa-brands fa-google"></i>
                     <span>Open in Gmail</span>
                     <i class="fa-solid fa-arrow-up-right-from-square text-2xs"></i>
@@ -494,6 +508,23 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
+        // Disable selection, right click, and copy shortcuts except inside input fields
+        document.addEventListener('selectstart', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('copy', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
         // Modal Handlers
         function openModal(modalId) {
             const modal = document.getElementById('modal-' + modalId);
@@ -609,20 +640,24 @@
                     reply = "Sami comes from a prominent political background spanning 3 generations of politicians.";
                 } else if (lower.includes("single") || lower.includes("relationship") || lower.includes("marry") || lower.includes("girlfriend") || lower.includes("gf")) {
                     reply = "Sami is currently single.";
-                } else if (lower.includes("who") || lower.includes("about") || lower.includes("identity") || lower.includes("sami")) {
+                } else if (lower.includes("who") || lower.includes("identity") || lower.includes("introduce") || lower.includes("bio") || lower.includes("overview") || lower === "sami" || lower === "about sami") {
                     reply = "Sami Abdullah is a Software Engineer specializing in Machine Learning, Artificial Intelligence, and Software Development.";
                 } else if (lower.includes("home") || lower.includes("where") || lower.includes("address") || lower.includes("location") || lower.includes("dhaka") || lower.includes("live")) {
                     reply = "Sami lives in Dhaka, Bangladesh.";
-                } else if (lower.includes("university") || lower.includes("versity") || lower.includes("education") || lower.includes("diu") || lower.includes("study")) {
+                } else if (lower.includes("school") || lower.includes("college") || lower.includes("rajshahi") || lower.includes("model")) {
+                    reply = "Sami studied at Rajshahi Government Model School and College.";
+                } else if (lower.includes("university") || lower.includes("versity") || lower.includes("education") || lower.includes("diu") || lower.includes("study") || lower.includes("degree")) {
                     reply = "Sami is pursuing a Bachelor of Science (B.Sc.) in Software Engineering at Daffodil International University (DIU), session 2025 – Present.";
-                } else if (lower.includes("skill") || lower.includes("language") || lower.includes("python") || lower.includes("c")) {
+                } else if (lower.includes("skill") || lower.includes("language") || lower.includes("python") || lower.includes("c++") || lower.includes("coding")) {
                     reply = "Sami is skilled in Python, C, Git, GitHub, and VS Code, while currently learning C++, Data Structures & Algorithms, OOP, SQL, and ML fundamentals.";
                 } else if (lower.includes("experience") || lower.includes("work")) {
                     reply = "Sami has 6+ months of hands-on experience in software development through personal and academic projects.";
                 } else if (lower.includes("project")) {
                     reply = "Sami is currently building ML and Software projects. Check out the 'Projects' tab in the Learn More hub!";
+                } else if (lower === "hi" || lower === "hello" || lower === "hey" || lower.startsWith("hi ") || lower.startsWith("hello ")) {
+                    reply = "Hello! I am Sami's AI. Feel free to ask me anything about Sami Abdullah, his background, education, family, or skills!";
                 } else {
-                    reply = "Sami Abdullah is a Software Engineering student at Daffodil International University (DIU) focused on Machine Learning and AI. Feel free to ask about his background, family, or skills!";
+                    reply = "I cannot answer that. I can only provide information regarding this portfolio and Sami Abdullah, as I was created specifically for this purpose.";
                 }
 
                 aiBubble.innerHTML = "<strong>Sami's AI:</strong> " + reply;
